@@ -1,4 +1,5 @@
-from collections import Counter
+from collections import Counter, defaultdict
+
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -11,7 +12,7 @@ promotion_map = {"E": (2, "B")}
 
 
 class Cart:
-    cart = {}
+    cart = defaultdict(int)
     total = 0
 
     def __init__(self, s: str):
@@ -30,7 +31,7 @@ class Cart:
                     self.total += price_map[item] * quantity
                 """check for applicable promotions"""
                 if item in promotion_map:
-                    promo_item = promotion_map[item][1]
+                    promo_quantity, promo_item = promotion_map[item][0], promotion_map[item][1]
                     if promo_item in self.cart:
                         discount = (self.cart[item] // promotion_map[item][0]) * price_map[promo_item]
                         self.total -= discount
