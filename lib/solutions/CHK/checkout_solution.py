@@ -1,4 +1,4 @@
-
+from collections import Counter
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -10,22 +10,7 @@ discount_map = {"A": (3, 130), "B": (2, 45)}
 from collections import defaultdict
     
 def convert_string_to_cart(s: str) -> dict:
-    cart = defaultdict(int)
-    n = 0
-    while s:
-        c = s[0]
-        if c.isdigit():
-            if n:
-                n += c
-            else:
-                n = c
-        else:
-            if n:
-                cart[c] = int(n)
-                n = 0
-            else:
-                cart[c] = 1
-        s = s[1:]
+    cart = Counter(s)
     return cart
 
 
@@ -50,5 +35,3 @@ def checkout(skus: str) -> int:
     except KeyError:
         return -1
     return total
-
-

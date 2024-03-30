@@ -9,17 +9,13 @@ class TestCheckout():
         assert checkout_solution.checkout("AB") == 80
 
     def test_convert_string_to_cart_returns_cart(self):
-        assert checkout_solution.convert_string_to_cart("A2B45C") == {"A":1, "B":2, "C":45}
+        assert checkout_solution.convert_string_to_cart("ABBCCC") == {"A":1, "B":2, "C":3}
 
     def test_illegal_item_returns_minus_one(self):
         assert checkout_solution.checkout("ABX") == -1
 
     def test_discount_applied_single_item(self):
-        assert checkout_solution.checkout("3A") == 130
+        assert checkout_solution.checkout("AAA") == 130
 
     def test_discount_applied_multiple_item(self):
-        assert checkout_solution.checkout("3A5B2C") == 290
-
-
-
-
+        assert checkout_solution.checkout("AAABBBBBCC") == 290
