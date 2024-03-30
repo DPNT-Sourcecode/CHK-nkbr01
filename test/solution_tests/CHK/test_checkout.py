@@ -33,7 +33,8 @@ class TestCheckout():
         assert cart.cart == {"A": 1, "B": 1, "E": 2}
 
     def test_free_B_with_two_E_2(self):
-        cart = checkout_solution.Cart("AEEB")
-        assert cart.calculate_cart_total() == 130
-        assert cart.cart == {"A": 1, "B": 1, "E": 2}
+        cart = checkout_solution.Cart("AEEEBB")
+        assert cart.calculate_cart_total() == 200
+        assert cart.cart == {"A": 1, "B": 2, "E": 3}
+
 
