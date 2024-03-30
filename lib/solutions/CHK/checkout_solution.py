@@ -35,6 +35,7 @@ class Cart:
         except KeyError:
             return -1
         # self.total -= self.applied_promotions
+        self.apply_promotion()
         return self.total
     
     # promotion_map = {"E": (2, "B")}
@@ -59,7 +60,8 @@ def calculate_discounted_price(cart_quantity: int, full_price: int, sale_quantit
 def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
-    cart.apply_promotion()
+    # cart.apply_promotion()
 
     return total
+
 
