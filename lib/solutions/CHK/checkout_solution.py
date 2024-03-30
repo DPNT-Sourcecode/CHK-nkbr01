@@ -29,10 +29,11 @@ class Cart:
                     self.total += full_total
         except KeyError:
             return -1
-        self.apply_promotion()
+        self.total -= self.apply_promotion()
         return self.total
     
     def apply_promotion(self):
+        total_discount = 0
         for item, promotion in promotion_map.items():
             if item in self.cart:
                 required_quantity, promo_item = promotion[0], promotion[1]
@@ -42,11 +43,13 @@ class Cart:
                 if item in multibuy_map:
                     previous_price = self.apply_multibuy(promo_item, cart_quantity)
                     updated_price = self.apply_multibuy(promo_item, updated_quantity)
-                    discount_total = previous_price - updated_price
                 else:
-                    discount_total = self.apply_full_price(promo_item, updated_quantity)
+                    previous_price = self.apply_full_price(promo_item, cart_quantity)
+                    updated_price = self.apply_full_price(promo_item, updated_quantity)
+                discount= previous_price - updated_price
+                total_discount += discount
                 # self.cart[promo_item] += promo_quantity
-        return discount_total
+        return total_discount
     
     def apply_full_price(self, item, quantity):
         item_price = price_map[item]
@@ -76,4 +79,5 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
 
