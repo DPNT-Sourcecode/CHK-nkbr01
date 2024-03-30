@@ -22,10 +22,10 @@ class Cart:
             for item, quantity in self.cart.items():
                 """check for applicable discounts"""
                 if item in multibuy_map:
-                    multibuy_total = self.apply_multibuy(item, quantity, multibuy_map, price_map)
+                    multibuy_total = self.apply_multibuy(item, quantity)
                     self.total += multibuy_total
                 else:
-                    full_total = self.apply_full_price(item, quantity, price_map)
+                    full_total = self.apply_full_price(item, quantity)
                     self.total += full_total
         except KeyError:
             return -1
@@ -39,12 +39,12 @@ class Cart:
                 quantity = self.cart[item] // promo_quantity
                 self.cart[promo_item] += quantity
 
-    def apply_full_price(self, item, quantity, price_map):
+    def apply_full_price(self, item, quantity):
         item_price = price_map[item]
         total = quantity * item_price
         return total
     
-    def apply_multibuy(self, item, quantity, multibuy_map, price_map):
+    def apply_multibuy(self, item, quantity):
         total = 0
         cart_quantity = quantity
         multibuy_promos = multibuy_map[item]
