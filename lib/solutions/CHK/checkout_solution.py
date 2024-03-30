@@ -37,8 +37,17 @@ class Cart:
             if item in self.cart:
                 required_quantity, promo_item = promotion[0], promotion[1]
                 promo_quantity = self.cart[item] // required_quantity
-                self.cart[promo_item] += promo_quantity
-
+                cart_quantity = self.cart[promo_item]
+                updated_quantity = cart_quantity - promo_quantity
+                if item in multibuy_map:
+                    previous_price = self.apply_multibuy(promo_item, cart_quantity)
+                    updated_price = self.apply_multibuy(promo_item, updated_quantity)
+                    discount_total = previous_price - updated_price
+                else:
+                    discount_total = self.apply_full_price(promo_item, updated_quantity)
+                # self.cart[promo_item] += promo_quantity
+        return discount_total
+    
     def apply_full_price(self, item, quantity):
         item_price = price_map[item]
         total = quantity * item_price
@@ -67,3 +76,4 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
