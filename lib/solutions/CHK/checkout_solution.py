@@ -17,9 +17,8 @@ class Cart:
     # def __init__(self, skus):
     #     convert_string_to_cart 
 
-    def convert_string_to_cart(self, s: str) -> dict:
+    def __init__(self, s: str):
         self.cart = Counter(s)
-        return self.cart
 
     def calculate_cart_total(self):
         # total = 0
@@ -59,6 +58,7 @@ def checkout(skus: str) -> int:
     # except KeyError:
     #     return -1
     # return total
+
 
 
 
