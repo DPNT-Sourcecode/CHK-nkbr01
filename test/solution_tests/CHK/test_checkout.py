@@ -24,6 +24,21 @@ class TestCheckout():
     def test_discount_applied_four_A(self):
         assert checkout_solution.checkout("AAAA") == 180
 
+    def test_discount_applied_five_A(self):
+        assert checkout_solution.checkout("AAAAA") == 200
+
+    def test_discount_applied_six_A(self):
+        assert checkout_solution.checkout("AAAAAA") == 250
+
+    def test_discount_applied_seven_A(self):
+        assert checkout_solution.checkout("AAAAAAA") == 300
+
+    def test_discount_applied_eight_A(self):
+        assert checkout_solution.checkout("AAAAAAAA") == 330
+
+    def test_discount_applied_nine_A(self):
+        assert checkout_solution.checkout("AAAAAAAA") == 380
+
     def test_discount_applied_multiple_item(self):
         assert checkout_solution.checkout("AAABBBBBCC") == 290
 
@@ -41,7 +56,6 @@ class TestCheckout():
 
     def test_free_B_with_two_E_total(self):
         assert checkout_solution.checkout("AEEEBB") == 215
-
     
     def test_free_B_with_two_E_cart(self):
         cart = checkout_solution.Cart("AEEEBB")

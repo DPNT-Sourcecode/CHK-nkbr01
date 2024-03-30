@@ -6,7 +6,7 @@ from collections import Counter, defaultdict
 
 price_map = {"A": 50, "B": 30, "C": 20, "D": 15, "E":40}
 
-discount_map = {"A": (3, 130), "B": (2, 45)}
+multibuy_map = {"A": [(5, 200), (3, 130)], "B": [(2, 45)]}
 
 promotion_map = {"E": (2, "B")}
 
@@ -22,9 +22,9 @@ class Cart:
         try:
             for item, quantity in self.cart.items():
                 """check for applicable discounts"""
-                if item in discount_map:
+                if item in multibuy_map:
                     full_price = price_map[item]
-                    sale_quantity, sale_price = discount_map[item]
+                    sale_quantity, sale_price = multibuy_map[item]
                     self.total += calculate_discounted_price(quantity, full_price, sale_quantity, sale_price)
                 else:
                     self.total += price_map[item] * quantity
