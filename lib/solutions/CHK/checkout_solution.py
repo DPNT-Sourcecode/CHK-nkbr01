@@ -5,6 +5,8 @@
 
 price_map = {"A": 50, "B": 30, "C": 20, "D": 15}
 
+discount_map = {"A": (3, 130), "B": (2, 45)}
+
 from collections import defaultdict
     
 def convert_string_to_cart(s: str) -> dict:
@@ -34,7 +36,7 @@ def checkout(skus: str) -> int:
     total = 0
     try:
         for item, quantity in cart.items():
-            total += price_map[item] * quantity
+            total += calculate_discounted_price(item, quantity)
     except KeyError:
         return -1
     return total
