@@ -30,11 +30,12 @@ class TestCheckout():
     def test_free_B_with_two_E(self):
         cart = checkout_solution.Cart("EEB")
         assert cart.calculate_cart_total() == 80
-        assert cart.cart == {"B": 1, "E": 2}
+        assert cart.cart == {"B": 2, "E": 2}
 
     def test_free_B_with_two_E_2(self):
         cart = checkout_solution.Cart("AEEEBB")
         assert cart.calculate_cart_total() == 215
         assert cart.cart == {"A": 1, "B": 3, "E": 3}
+
 
 
