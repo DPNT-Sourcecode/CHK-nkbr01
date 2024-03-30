@@ -19,7 +19,6 @@ class Cart:
         self.cart = Counter(s)
 
     def calculate_cart_total(self):
-        # total = 0
         try:
             for item, quantity in self.cart.items():
                 """check for applicable discounts"""
@@ -32,9 +31,12 @@ class Cart:
                 """check for applicable promotions"""
                 if item in promotion_map:
                     promo_quantity, promo_item = promotion_map[item][0], promotion_map[item][1]
-                    if promo_item in self.cart:
-                        discount = (self.cart[item] // promotion_map[item][0]) * price_map[promo_item]
-                        self.total -= discount
+                    quantity = self.cart[item] // promo_quantity
+                    self.cart[promo_item] += quantity
+                    applied_promotions = price_map[promo_item] * quantity
+                    # if promo_item in self.cart:
+                    #     discount = (self.cart[item] // promotion_map[item][0]) * price_map[promo_item]
+                    #     self.total -= discount
         except KeyError:
             return -1
         return self.total
@@ -48,12 +50,10 @@ def calculate_discounted_price(cart_quantity: int, full_price: int, sale_quantit
     remainder = cart_quantity % sale_quantity
     total_price = quantity * sale_price + remainder * full_price
     return total_price
-
-
-
                 
 
 def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
+
