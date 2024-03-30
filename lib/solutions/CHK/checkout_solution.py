@@ -7,6 +7,8 @@ price_map = {"A": 50, "B": 30, "C": 20, "D": 15}
 
 discount_map = {"A": (3, 130), "B": (2, 45)}
 
+promotion_map = {"E": (2, "B")}
+
 from collections import defaultdict
     
 def convert_string_to_cart(s: str) -> dict:
