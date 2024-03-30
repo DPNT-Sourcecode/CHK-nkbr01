@@ -10,7 +10,6 @@ multibuy_map = {"A": [(5, 200), (3, 130)], "B": [(2, 45)]}
 
 promotion_map = {"E": (2, "B")}
 
-
 class Cart:
 
     def __init__(self, s: str):
@@ -20,7 +19,6 @@ class Cart:
     def calculate_cart_total(self):
         try:
             for item, quantity in self.cart.items():
-                """check for applicable discounts"""
                 if item in multibuy_map:
                     multibuy_total = self.apply_multibuy(item, quantity)
                     self.total += multibuy_total
@@ -79,5 +77,6 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
 
 
