@@ -30,7 +30,8 @@ class Cart:
                     self.total += price_map[item] * quantity
                 """check for applicable promotions"""
                 if item in promotion_map:
-                    
+                    apply_promotions
+
         except KeyError:
             return -1
         return self.total
@@ -43,7 +44,7 @@ def calculate_discounted_price(cart_quantity: int, full_price: int, sale_quantit
     return total_price
 
 
-def calculate_promotions():
+def apply_promotions(cart_quantity: int, promotion_item: str, promotion_item_price: int):
     pass
                 
 
@@ -51,3 +52,4 @@ def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
+
