@@ -37,7 +37,7 @@ class TestCheckout():
         assert checkout_solution.checkout("AAAAAAAA") == 330
 
     def test_discount_applied_nine_A(self):
-        assert checkout_solution.checkout("AAAAAAAA") == 380
+        assert checkout_solution.checkout("AAAAAAAAA") == 380
 
     def test_discount_applied_multiple_item(self):
         assert checkout_solution.checkout("AAABBBBBCC") == 290
@@ -62,3 +62,4 @@ class TestCheckout():
         cart.calculate_cart_total()
         # cart.apply_promotion()
         assert cart.cart == {"A": 1, "B": 3, "E": 3}
+
