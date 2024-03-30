@@ -17,5 +17,12 @@ class TestCheckout():
     def test_discount_applied_single_item(self):
         assert checkout_solution.checkout("AAA") == 130
 
+    def test_discount_applied_two_A(self):
+        assert checkout_solution.checkout("AA") == 100
+
+    def test_discount_applied_four_A(self):
+        assert checkout_solution.checkout("AAAA") == 180
+
     def test_discount_applied_multiple_item(self):
         assert checkout_solution.checkout("AAABBBBBCC") == 290
+
