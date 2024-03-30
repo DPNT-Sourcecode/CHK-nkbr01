@@ -33,8 +33,8 @@ class Cart:
     def apply_promotion(self):
         total_discount = 0
         for item, promotion in promotion_map.items():
-            if item in self.cart:
-                required_quantity, promo_item = promotion[0], promotion[1]
+            required_quantity, promo_item = promotion[0], promotion[1]
+            if item in self.cart and promo_item in self.cart:
                 promo_quantity = self.cart[item] // required_quantity
                 cart_quantity = self.cart[promo_item]
                 updated_quantity = cart_quantity - promo_quantity
@@ -77,6 +77,7 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
 
 
 
