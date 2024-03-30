@@ -9,14 +9,17 @@ discount_map = {"A": (3, 130), "B": (2, 45)}
 
 promotion_map = {"E": (2, "B")}
 
+def convert_string_to_cart(self, s: str) -> dict:
+    cart = Cart()
+    Counter(s)
+    return cart
+
 class Cart:
     cart = {}
     total = 0
-    
-    def convert_string_to_cart(self, s: str) -> dict:
-        self.cart = Counter(s)
-        return self.cart
 
+    def __init__(self, skus):
+        convert_string_to_cart 
 
     def calculate_discounted_price(self, cart_quantity: int, full_price: int, sale_quantity: int, sale_price: int):
         quantity = cart_quantity // sale_quantity
@@ -26,7 +29,8 @@ class Cart:
                 
 
 def checkout(skus: str) -> int:
-    cart = Cart.convert_string_to_cart(skus)
+    cart = Cart()
+    .convert_string_to_cart(skus)
     total = 0
     try:
         for item, quantity in cart.items():
