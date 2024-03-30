@@ -67,6 +67,3 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
-
-
-

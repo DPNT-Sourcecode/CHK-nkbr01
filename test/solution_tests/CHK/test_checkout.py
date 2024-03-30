@@ -62,4 +62,3 @@ class TestCheckout():
         cart.calculate_cart_total()
         # cart.apply_promotion()
         assert cart.cart == {"A": 1, "B": 3, "E": 3}
-
