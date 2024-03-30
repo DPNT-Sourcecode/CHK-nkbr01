@@ -23,11 +23,14 @@ class Cart:
             for item, quantity in self.cart.items():
                 """check for applicable discounts"""
                 if item in multibuy_map:
-                    full_price = price_map[item]
-                    sale_quantity, sale_price = multibuy_map[item]
-                    self.total += calculate_discounted_price(quantity, full_price, sale_quantity, sale_price)
+                    multibuy_total = self.apply_multibuy(item, quantity, multibuy_map, price_map)
+                    self.total += multibuy_total
+                    # full_price = price_map[item]
+                    # sale_quantity, sale_price = multibuy_map[item]
+                    # self.total += calculate_discounted_price(quantity, full_price, sale_quantity, sale_price)
                 else:
-                    self.total += price_map[item] * quantity
+                    full_total = self.apply_full_price(item, quantity, price_map)
+                    self.total += full_total
 
                     # if promo_item in self.cart:
                     #     discount = (self.cart[item] // promotion_map[item][0]) * price_map[promo_item]
@@ -38,8 +41,6 @@ class Cart:
         self.apply_promotion()
         return self.total
     
-    # promotion_map = {"E": (2, "B")}
-
     def apply_promotion(self):
         for item, promotion in promotion_map.items():
         # for item, quantity in self.cart.items():
@@ -49,10 +50,9 @@ class Cart:
                 self.cart[promo_item] += quantity
                 # self.applied_promotions = price_map[promo_item] * quantity
 
-    def apply_full_price(self, cart, item, price_map):
-        cart_quantity = cart[item]
+    def apply_full_price(self, item, quantity, price_map):
         item_price = price_map[item]
-        total = cart_quantity * item_price
+        total = quantity * item_price
         return total
     
     def apply_multibuy(self, cart, item, multibuy_map, price_map):
@@ -74,11 +74,11 @@ class Cart:
 
 
 
-def calculate_discounted_price(cart_quantity: int, full_price: int, sale_quantity: int, sale_price: int):
-    quantity = cart_quantity // sale_quantity
-    remainder = cart_quantity % sale_quantity
-    total_price = quantity * sale_price + remainder * full_price
-    return total_price
+# def calculate_discounted_price(cart_quantity: int, full_price: int, sale_quantity: int, sale_price: int):
+#     quantity = cart_quantity // sale_quantity
+#     remainder = cart_quantity % sale_quantity
+#     total_price = quantity * sale_price + remainder * full_price
+#     return total_price
                 
 
 def checkout(skus: str) -> int:
@@ -87,4 +87,5 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
 
