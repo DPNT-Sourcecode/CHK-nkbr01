@@ -14,6 +14,8 @@ class TestCheckout():
     def test_illegal_item_returns_minus_one(self):
         assert checkout_solution.checkout("ABX") == -1
 
-    
+    def test_discount_applied(self):
+        assert checkout_solution.checkout("3A") == 130
+
 
 
