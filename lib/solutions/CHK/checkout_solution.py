@@ -14,6 +14,7 @@ promotion_map = {"E": (2, "B")}
 class Cart:
     cart = defaultdict(int)
     total = 0
+    applied_promotions = 0
 
     def __init__(self, s: str):
         self.cart = Counter(s)
@@ -33,12 +34,13 @@ class Cart:
                     promo_quantity, promo_item = promotion_map[item][0], promotion_map[item][1]
                     quantity = self.cart[item] // promo_quantity
                     self.cart[promo_item] += quantity
-                    applied_promotions = price_map[promo_item] * quantity
+                    self.applied_promotions = price_map[promo_item] * quantity
                     # if promo_item in self.cart:
                     #     discount = (self.cart[item] // promotion_map[item][0]) * price_map[promo_item]
                     #     self.total -= discount
         except KeyError:
             return -1
+        self.total -= self.applied_promotions
         return self.total
     
     # def apply_promotions(cart_quantity: int, promotion_item: str, promotion_item_price: int):
@@ -56,4 +58,5 @@ def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
+
 
