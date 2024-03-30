@@ -28,11 +28,13 @@ def convert_string_to_cart(s: str) -> dict:
         s = s[1:]
     return cart
 
-def calculate_discounted_price(item, quantity):
-    if item in discount_map:
 
-    return price_map[item] * quantity
-    
+def calculate_discounted_price(cart_quantity, full_price, sale_quantity, sale_price):
+    quantity = cart_quantity // sale_quantity
+    remainder = cart_quantity % sale_quantity
+    total_price = quantity * sale_price + remainder * full_price
+    return total_price
+            
 
 def checkout(skus: str) -> int:
     cart = convert_string_to_cart(skus)
@@ -40,10 +42,13 @@ def checkout(skus: str) -> int:
     try:
         for item, quantity in cart.items():
             if item in discount_map:
-                total += calculate_discounted_price(item, quantity)
+                full_price = price_map[item]
+                sale_quantity, sale_price = discount_map[item]
+                total += calculate_discounted_price(quantity, full_price, sale_quantity, sale_price)
             else:
                 total += price_map[item] * quantity
     except KeyError:
         return -1
     return total
+
 
