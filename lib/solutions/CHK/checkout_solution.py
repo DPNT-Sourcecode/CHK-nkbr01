@@ -12,11 +12,10 @@ promotion_map = {"E": (2, "B")}
 
 
 class Cart:
-    cart = defaultdict(int)
-    total = 0
-    applied_promotions = 0
 
     def __init__(self, s: str):
+        self.total = 0
+        self.applied_promotions = 0
         self.cart = Counter(s)
 
     def calculate_cart_total(self):
@@ -58,5 +57,6 @@ def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
+
 
 
