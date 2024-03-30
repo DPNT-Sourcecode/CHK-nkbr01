@@ -37,9 +37,12 @@ class Cart:
         # self.total -= self.applied_promotions
         return self.total
     
+    # promotion_map = {"E": (2, "B")}
+
     def apply_promotion(self):
-        for item, quantity in self.cart.items():
-            if item in promotion_map:
+        for item in promotion_map:
+        # for item, quantity in self.cart.items():
+            if item in self.cart():
                 promo_quantity, promo_item = promotion_map[item][0], promotion_map[item][1]
                 quantity = self.cart[item] // promo_quantity
                 self.cart[promo_item] += quantity
