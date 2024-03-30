@@ -29,6 +29,3 @@ class TestCheckout():
     def test_free_B_with_two_E(self):
         assert checkout_solution.checkout("AEE") == 130
         assert checkout_solution.checkout.cart("AEE") == {"A": 1, "B": 1, "E": 2}
-
-
-

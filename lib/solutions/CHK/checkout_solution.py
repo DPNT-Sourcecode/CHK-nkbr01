@@ -38,5 +38,3 @@ def checkout(skus: str) -> int:
     except KeyError:
         return -1
     return total
-
-
