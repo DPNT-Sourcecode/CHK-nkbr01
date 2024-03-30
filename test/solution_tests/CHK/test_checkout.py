@@ -26,3 +26,7 @@ class TestCheckout():
     def test_discount_applied_multiple_item(self):
         assert checkout_solution.checkout("AAABBBBBCC") == 290
 
+    def test_free_B_with_two_E(self):
+        assert checkout_solution.checkout("AEE") == 290
+
+
