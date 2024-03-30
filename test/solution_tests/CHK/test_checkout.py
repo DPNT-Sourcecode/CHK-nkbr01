@@ -42,8 +42,44 @@ class TestCheckout():
     def test_discount_applied_multiple_item(self):
         assert checkout_solution.checkout("AAABBBBBCC") == 290
 
-    def test_discount_applied_multiple_item(self):
-        assert checkout_solution.checkout("AAABBBBBCC") == 290
+    def test_discount_applied_multiple_item_1(self):
+        assert checkout_solution.checkout("EE") == 80
+
+    def test_discount_applied_multiple_item_2(self):
+        assert checkout_solution.checkout("EEB") == 110
+
+    def test_discount_applied_multiple_item_3(self):
+        assert checkout_solution.checkout("EEEB") == 150
+
+    def test_discount_applied_multiple_item_4(self):
+        assert checkout_solution.checkout("EEEEBB") == 205
+
+    def test_discount_applied_multiple_item_5(self):
+        assert checkout_solution.checkout("BEBEEE") == 205
+
+    def test_discount_applied_multiple_item_6(self):
+        assert checkout_solution.checkout("B") == 80
+
+    def test_discount_applied_multiple_item_7(self):
+        assert checkout_solution.checkout("BB") == 110
+
+    def test_discount_applied_multiple_item_8(self):
+        assert checkout_solution.checkout("BBB") == 150
+
+    def test_discount_applied_multiple_item_9(self):
+        assert checkout_solution.checkout("BBBB") == 205
+
+    def test_discount_applied_multiple_item_10(self):
+        assert checkout_solution.checkout("ABCDEABCDE") == 205
+
+    def test_discount_applied_multiple_item_11(self):
+        assert checkout_solution.checkout("CCADDEEBBA") == 150
+
+    def test_discount_applied_multiple_item_12(self):
+        assert checkout_solution.checkout("AAAAAEEBAAABB") == 205
+
+    def test_discount_applied_multiple_item_13(self):
+        assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 205
 
     # def test_free_B_with_two_E(self):
     #     cart = checkout_solution.Cart("EEB")
@@ -65,3 +101,4 @@ class TestCheckout():
     #     cart.calculate_cart_total()
     #     # cart.apply_promotion()
     #     assert cart.cart == {"A": 1, "B": 3, "E": 3}
+
