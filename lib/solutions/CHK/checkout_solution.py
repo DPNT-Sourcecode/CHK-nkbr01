@@ -30,8 +30,10 @@ class Cart:
                     self.total += price_map[item] * quantity
                 """check for applicable promotions"""
                 if item in promotion_map:
-                    apply_promotions
-
+                    promo_item = promotion_map[item][1]
+                    if promo_item in self.cart:
+                        discount = (self.cart[item] // promotion_map[item][0]) * price_map[promo_item]
+                        self.total -= discount
         except KeyError:
             return -1
         return self.total
@@ -54,5 +56,6 @@ def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
+
 
 
