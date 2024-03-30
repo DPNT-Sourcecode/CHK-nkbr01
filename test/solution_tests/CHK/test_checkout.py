@@ -11,3 +11,9 @@ class TestCheckout():
     def test_convert_string_to_cart_returns_cart(self):
         assert checkout_solution.convert_string_to_cart("A2B45C") == {"A":1, "B":2, "C":45}
 
+    def test_illegal_item_returns_minus_one(self):
+        assert checkout_solution.checkout("ABX") == -1
+
+    
+
+
