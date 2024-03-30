@@ -49,6 +49,13 @@ class Cart:
                 self.cart[promo_item] += quantity
                 # self.applied_promotions = price_map[promo_item] * quantity
 
+    def apply_full_price(self, cart, item, price_map):
+        cart_quantity = cart[item]
+        item_price = price_map[item]
+        total = cart_quantity * item_price
+        return total
+
+
 
 def calculate_discounted_price(cart_quantity: int, full_price: int, sale_quantity: int, sale_price: int):
     quantity = cart_quantity // sale_quantity
