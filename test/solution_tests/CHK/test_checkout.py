@@ -9,7 +9,8 @@ class TestCheckout():
         assert checkout_solution.checkout("AB") == 80
 
     def test_convert_string_to_cart_returns_cart(self):
-        assert checkout_solution.convert_string_to_cart("ABBCCC") == {"A":1, "B":2, "C":3}
+        cart = checkout_solution.Cart()
+        assert cart.convert_string_to_cart("ABBCCC") == {"A":1, "B":2, "C":3}
 
     def test_illegal_item_returns_minus_one(self):
         assert checkout_solution.checkout("ABX") == -1
@@ -29,3 +30,4 @@ class TestCheckout():
     def test_free_B_with_two_E(self):
         assert checkout_solution.checkout("AEE") == 130
         assert checkout_solution.checkout.cart("AEE") == {"A": 1, "B": 1, "E": 2}
+
