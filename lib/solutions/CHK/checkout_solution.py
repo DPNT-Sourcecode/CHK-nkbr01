@@ -35,9 +35,9 @@ class Cart:
     def apply_promotion(self):
         for item, promotion in promotion_map.items():
             if item in self.cart:
-                promo_quantity, promo_item = promotion[0], promotion[1]
-                quantity = self.cart[item] // promo_quantity
-                self.cart[promo_item] += quantity
+                required_quantity, promo_item = promotion[0], promotion[1]
+                promo_quantity = self.cart[item] // required_quantity
+                self.cart[promo_item] += promo_quantity
 
     def apply_full_price(self, item, quantity):
         item_price = price_map[item]
@@ -59,7 +59,7 @@ class Cart:
             if cart_quantity:
                 total += cart_quantity * price_map[item]
                 cart_quantity = 0
-        return total                
+        return total              
 
 def checkout(skus: str) -> int:
     cart = Cart(skus)

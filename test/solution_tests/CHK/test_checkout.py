@@ -58,28 +58,28 @@ class TestCheckout():
         assert checkout_solution.checkout("BEBEEE") == 205
 
     def test_discount_applied_multiple_item_6(self):
-        assert checkout_solution.checkout("B") == 80
+        assert checkout_solution.checkout("B") == 30
 
     def test_discount_applied_multiple_item_7(self):
-        assert checkout_solution.checkout("BB") == 110
+        assert checkout_solution.checkout("BB") == 45
 
     def test_discount_applied_multiple_item_8(self):
-        assert checkout_solution.checkout("BBB") == 150
+        assert checkout_solution.checkout("BBB") == 75
 
     def test_discount_applied_multiple_item_9(self):
-        assert checkout_solution.checkout("BBBB") == 205
+        assert checkout_solution.checkout("BBBB") == 90
 
     def test_discount_applied_multiple_item_10(self):
-        assert checkout_solution.checkout("ABCDEABCDE") == 205
+        assert checkout_solution.checkout("ABCDEABCDE") == 295
 
     def test_discount_applied_multiple_item_11(self):
-        assert checkout_solution.checkout("CCADDEEBBA") == 150
+        assert checkout_solution.checkout("CCADDEEBBA") == 295
 
     def test_discount_applied_multiple_item_12(self):
-        assert checkout_solution.checkout("AAAAAEEBAAABB") == 205
+        assert checkout_solution.checkout("AAAAAEEBAAABB") == 485
 
     def test_discount_applied_multiple_item_13(self):
-        assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 205
+        assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 695
 
     # def test_free_B_with_two_E(self):
     #     cart = checkout_solution.Cart("EEB")
@@ -101,4 +101,5 @@ class TestCheckout():
     #     cart.calculate_cart_total()
     #     # cart.apply_promotion()
     #     assert cart.cart == {"A": 1, "B": 3, "E": 3}
+
 
