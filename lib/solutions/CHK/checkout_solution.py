@@ -29,6 +29,8 @@ class Cart:
                 else:
                     self.total += price_map[item] * quantity
                 """check for applicable promotions"""
+                if item in promotion_map:
+                    
         except KeyError:
             return -1
         return self.total
