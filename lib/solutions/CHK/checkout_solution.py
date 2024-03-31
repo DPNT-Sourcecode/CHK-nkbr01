@@ -4,7 +4,7 @@ from collections import Counter, defaultdict
 # noinspection PyUnusedLocal
 # skus = unicode string
 
-price_map = {"A": 50, "B": 30, "C": 20, "D": 15, "E":40}
+price_map = {"A": 50, "B": 30, "C": 20, "D": 15, "E":40, "F":10}
 
 multibuy_map = {"A": [(5, 200), (3, 130)], "B": [(2, 45)]}
 
@@ -76,5 +76,6 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
 
 
