@@ -20,10 +20,7 @@ class Cart:
         try:
             for item, quantity in self.cart.items():
                 if item in multibuy_map:
-                    multibuy_promos = multibuy_map[item]
-                    for promo in multibuy_promos:
-                    promo_quantity, promo_price = multibuy_map[item][0], multibuy_map[item][1]
-                    multibuy_total = self.apply_multibuy(item, quantity, promo_quantity, promo_price)
+                    multibuy_total = self.apply_multibuy(item, quantity)
                     self.total += multibuy_total
                 else:
                     full_total = self.apply_full_price(item, quantity)
@@ -47,7 +44,7 @@ class Cart:
                 else:
                     previous_price = self.apply_full_price(promo_item, cart_quantity)
                     updated_price = self.apply_full_price(promo_item, updated_quantity)
-                discount= previous_price - updated_price
+                discount = previous_price - updated_price
                 total_discount += discount
         return total_discount
     
@@ -56,12 +53,13 @@ class Cart:
         total = quantity * item_price
         return total
     
-    def apply_multibuy(self, item, quantity, promo_quantity, promo_price):
+    def apply_multibuy(self, item, quantity):
         total = 0
         cart_quantity = quantity
         multibuy_promos = multibuy_map[item]
         while cart_quantity:
             for promo in multibuy_promos:
+                promo_quantity, promo_price = promo[0], promo[1]
                 if cart_quantity >= promo_quantity:
                     used_promo = cart_quantity // promo_quantity
                     remainder = cart_quantity % promo_quantity
@@ -70,7 +68,7 @@ class Cart:
             if cart_quantity:
                 total += cart_quantity * price_map[item]
                 cart_quantity = 0
-        return total              
+        return total
 
 def checkout(skus: str) -> int:
     cart = Cart(skus)
@@ -78,3 +76,4 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
