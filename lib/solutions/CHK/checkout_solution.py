@@ -8,7 +8,7 @@ price_map = {"A": 50, "B": 30, "C": 20, "D": 15, "E":40}
 
 multibuy_map = {"A": [(5, 200), (3, 130)], "B": [(2, 45)]}
 
-promotion_map = {"E": (2, "B")}
+promotion_map = {"E": (2, "B"), "F": (2, "F")}
 
 class Cart:
 
@@ -76,4 +76,5 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
 
