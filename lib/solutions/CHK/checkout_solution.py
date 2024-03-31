@@ -38,7 +38,7 @@ class Cart:
                 promo_quantity = self.cart[item] // required_quantity
                 cart_quantity = self.cart[promo_item]
                 updated_quantity = cart_quantity - promo_quantity
-                if item in multibuy_map:
+                if promo_item in multibuy_map:
                     previous_price = self.apply_multibuy(promo_item, cart_quantity)
                     updated_price = self.apply_multibuy(promo_item, updated_quantity)
                 else:
