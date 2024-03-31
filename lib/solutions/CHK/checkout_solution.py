@@ -46,7 +46,6 @@ class Cart:
                     updated_price = self.apply_full_price(promo_item, updated_quantity)
                 discount= previous_price - updated_price
                 total_discount += discount
-                # self.cart[promo_item] += promo_quantity
         return total_discount
     
     def apply_full_price(self, item, quantity):
@@ -77,3 +76,4 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
