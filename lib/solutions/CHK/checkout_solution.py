@@ -20,7 +20,10 @@ class Cart:
         try:
             for item, quantity in self.cart.items():
                 if item in multibuy_map:
-                    multibuy_total = self.apply_multibuy(item, quantity)
+                    multibuy_promos = multibuy_map[item]
+                    for promo in multibuy_promos:
+                    promo_quantity, promo_price = multibuy_map[item][0], multibuy_map[item][1]
+                    multibuy_total = self.apply_multibuy(item, quantity, promo_quantity, promo_price)
                     self.total += multibuy_total
                 else:
                     full_total = self.apply_full_price(item, quantity)
@@ -53,13 +56,12 @@ class Cart:
         total = quantity * item_price
         return total
     
-    def apply_multibuy(self, item, quantity):
+    def apply_multibuy(self, item, quantity, promo_quantity, promo_price):
         total = 0
         cart_quantity = quantity
         multibuy_promos = multibuy_map[item]
         while cart_quantity:
             for promo in multibuy_promos:
-                promo_quantity, promo_price = promo[0], promo[1]
                 if cart_quantity >= promo_quantity:
                     used_promo = cart_quantity // promo_quantity
                     remainder = cart_quantity % promo_quantity
