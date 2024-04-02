@@ -125,3 +125,12 @@ class TestCheckout():
 
     def test_discount_applied_multiple_item_28(self):
         assert checkout_solution.checkout("NNN") == 120
+
+    def test_discount_applied_multiple_item_26(self):
+        assert checkout_solution.checkout("G") == 20
+
+    def test_discount_applied_multiple_item_27(self):
+        assert checkout_solution.checkout("ABCDEFGHIJKLMNOPQRSTUVWXYZ") == 965
+
+    def test_discount_applied_multiple_item_28(self):
+        assert checkout_solution.checkout("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ") == 1880
