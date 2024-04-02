@@ -133,4 +133,4 @@ class TestCheckout():
         assert checkout_solution.checkout("ABCDEFGHIJKLMNOPQRSTUVWXYZ") == 853
 
     def test_discount_applied_multiple_item_28(self):
-        assert checkout_solution.checkout("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ") == 1676
+        assert checkout_solution.checkout("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ") == 1646

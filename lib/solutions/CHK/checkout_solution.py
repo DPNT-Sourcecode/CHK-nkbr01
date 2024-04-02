@@ -46,7 +46,7 @@ MULTIBUYS = {
         (10, 80),
     ],
     "K": [
-        (2, 150),
+        (2, 120),
     ],
     "P": [
         (5, 200),
@@ -143,7 +143,14 @@ class Cart:
         return total_discount
     
     def _apply_group_discount(self):
-        return 0
+        """
+        GROUP_DISCOUNT = {
+            ("S","T","X","Y","Z") : [
+                (3, 45)
+            ],
+        }
+        """
+        for products,
 
 def checkout(skus: str) -> int:
     cart = Cart(skus)
