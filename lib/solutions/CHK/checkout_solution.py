@@ -150,24 +150,28 @@ class Cart:
             ],
         }
         """
+        total_discount = 0
         for products, discounts in GROUP_DISCOUNT.items():
             cart_quantity, total_before_discount = 0, 0
             price_list = []
             for product in products:
                 product_quantity = self.cart[product]
                 product_price = FULL_PRICES[product]
-                total = self._apply_full_price(product, product_quantity)
+                total_before_discount = self._apply_full_price(product, product_quantity)
                 cart_quantity += product_quantity
                 price_list.append(product_price)
+            price_list = sorted(price_list)
             for req_quantity, group_price in discounts:
                 if cart_quantity >= req_quantity:
                     used_times = cart_quantity // req_quantity
-                    remainder = cart_quantity % req_quantity 
-                    total_price = (used_times * group_price) + sum(price_list[:remainder])
+                    remainder = cart_quantity % req_quantity
+                    total_after_discount = (used_times * group_price) + sum(price_list[:remainder])
+                    total_discount += (total_before_discount - total_after_discount)
+                    cart_quantity = remainder
+        return total_discount
 
 
 def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
-
