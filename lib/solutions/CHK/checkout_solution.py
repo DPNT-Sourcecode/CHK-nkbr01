@@ -35,8 +35,8 @@ class Cart:
 
     def calculate_cart_total(self):
         try:
-            for product, quantity in self.cart.products():
-                self.total = self._apply_full_price(product, quantity)
+            for product, quantity in self.cart.items():
+                self.total += self._apply_full_price(product, quantity)
                 if product in MULTIBUY_DISCOUNTS:
                     self.total -= self._apply_multibuy(product, quantity)
                     # self.total += multibuy_total
@@ -47,15 +47,15 @@ class Cart:
             return self.total
         except KeyError:
             return -1
-
     
     def _apply_full_price(self, product, quantity):
-        total = quantity * FULL_PRICES[product]
+        product_price = FULL_PRICES[product]
+        total = quantity * product_price
         return total
 
     def apply_promotion(self):
         total_discount = 0
-        for product, promotion in PROMOS.products():
+        for product, promotion in PROMOS.items():
             required_quantity, promo_product = promotion[0], promotion[1]
             if product in self.cart and promo_product in self.cart:
                 promo_quantity = self.cart[product] // required_quantity
@@ -70,23 +70,6 @@ class Cart:
                 discount = previous_price - updated_price
                 total_discount += discount
         return total_discount
-    
-    # def apply_multibuy(self, product, quantity):
-    #     total = 0
-    #     cart_quantity = quantity
-    #     multibuy_promos = MULTIBUY_DISCOUNTS[product]
-    #     while cart_quantity:
-    #         for promo in multibuy_promos:
-    #             promo_quantity, promo_price = promo[0], promo[1]
-    #             if cart_quantity >= promo_quantity:
-    #                 used_promo = cart_quantity // promo_quantity
-    #                 remainder = cart_quantity % promo_quantity
-    #                 total += promo_price * used_promo
-    #                 cart_quantity = remainder
-    #         if cart_quantity:
-    #             total += cart_quantity * FULL_PRICES[product]
-    #             cart_quantity = 0
-    #     return total
 
     def _calculate_multibuy(self, cart_quantity, req_quantity, disc_amount, total_discount):
         # if cart_quantity >= req_quantity:
@@ -112,6 +95,7 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
 
 
 
