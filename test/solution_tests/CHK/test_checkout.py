@@ -130,10 +130,10 @@ class TestCheckout():
         assert checkout_solution.checkout("G") == 20
 
     def test_discount_applied_multiple_item_30(self):
-        assert checkout_solution.checkout("ABCDEFGHIJKLMNOPQRSTUVWXYZ") == 853
+        assert checkout_solution.checkout("ABCDEFGHIJKLMNOPQRSTUVWXYZ") == 837
 
     def test_discount_applied_multiple_item_31(self):
-        assert checkout_solution.checkout("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ") == 1646
+        assert checkout_solution.checkout("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ") == 1602
 
     def test_discount_applied_multiple_item_32(self):
         assert checkout_solution.checkout("STX") == 45
@@ -150,3 +150,6 @@ class TestCheckout():
     def test_discount_applied_multiple_item_36(self):
         #choose the most expensive for the group discount
         assert checkout_solution.checkout("STXYZ") == 82
+
+    def test_discount_applied_multiple_item_37(self):
+        assert checkout_solution.checkout("SSSYZ") == 82

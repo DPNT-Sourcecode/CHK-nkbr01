@@ -155,9 +155,8 @@ class Cart:
             cart_quantity, total_before_discount = 0, 0
             price_list = []
             for product in products:
-                product_quantity = self.cart[product]
-                product_price = FULL_PRICES[product]
-                total_before_discount = self._apply_full_price(product, product_quantity)
+                product_quantity, product_price = self.cart[product], FULL_PRICES[product]
+                total_before_discount += self._apply_full_price(product, product_quantity)
                 cart_quantity += product_quantity
                 price_list.append(product_price)
             price_list = sorted(price_list)
