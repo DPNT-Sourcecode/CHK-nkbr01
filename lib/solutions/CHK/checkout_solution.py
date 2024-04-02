@@ -4,11 +4,28 @@ from collections import Counter, defaultdict
 # noinspection PyUnusedLocal
 # skus = unicode string
 
-price_map = {"A": 50, "B": 30, "C": 20, "D": 15, "E":40, "F":10}
+FULL_PRICES = {
+    "A": 50, 
+    "B": 30, 
+    "C": 20, 
+    "D": 15, 
+    "E": 40, 
+    "F": 10,
+}
 
-multibuy_map = {"A": [(5, 200), (3, 130)], "B": [(2, 45)]}
+MULTIBUY_DISCOUNTS = {
+    "A": [
+        (5, 200), #required_amount, total_discount_amount
+        (3, 130),
+    ],
+    "B": [
+        (2, 45)
+    ],
+}
 
-promotion_map = {"E": (2, "B"), "F": (2, "F")}
+PROMOS = {
+    "E": (2, "B"), 
+    "F": (2, "F")}
 
 class Cart:
 
@@ -19,7 +36,7 @@ class Cart:
     def calculate_cart_total(self):
         try:
             for item, quantity in self.cart.items():
-                if item in multibuy_map:
+                if item in MULTIBUY_DISCOUNTS:
                     multibuy_total = self.apply_multibuy(item, quantity)
                     self.total += multibuy_total
                 else:
@@ -32,13 +49,13 @@ class Cart:
     
     def apply_promotion(self):
         total_discount = 0
-        for item, promotion in promotion_map.items():
+        for item, promotion in PROMOS.items():
             required_quantity, promo_item = promotion[0], promotion[1]
             if item in self.cart and promo_item in self.cart:
                 promo_quantity = self.cart[item] // required_quantity
                 cart_quantity = self.cart[promo_item]
                 updated_quantity = cart_quantity - promo_quantity
-                if promo_item in multibuy_map:
+                if promo_item in MULTIBUY_DISCOUNTS:
                     previous_price = self.apply_multibuy(promo_item, cart_quantity)
                     updated_price = self.apply_multibuy(promo_item, updated_quantity)
                 else:
@@ -49,14 +66,14 @@ class Cart:
         return total_discount
     
     def apply_full_price(self, item, quantity):
-        item_price = price_map[item]
+        item_price = FULL_PRICES[item]
         total = quantity * item_price
         return total
     
     def apply_multibuy(self, item, quantity):
         total = 0
         cart_quantity = quantity
-        multibuy_promos = multibuy_map[item]
+        multibuy_promos = MULTIBUY_DISCOUNTS[item]
         while cart_quantity:
             for promo in multibuy_promos:
                 promo_quantity, promo_price = promo[0], promo[1]
@@ -66,7 +83,7 @@ class Cart:
                     total += promo_price * used_promo
                     cart_quantity = remainder
             if cart_quantity:
-                total += cart_quantity * price_map[item]
+                total += cart_quantity * FULL_PRICES[item]
                 cart_quantity = 0
         return total
 
