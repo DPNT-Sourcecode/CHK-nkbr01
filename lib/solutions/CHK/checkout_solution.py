@@ -151,8 +151,9 @@ class Cart:
                 product_quantity, product_price = self.cart[product], FULL_PRICES[product]
                 total_before_discount += self._apply_full_price(product, product_quantity)
                 cart_quantity += product_quantity
-                price_list.append(product_price)
+                price_list.extend([product_price * product_quantity])
             price_list = sorted(price_list)
+            print(price_list)
             for req_quantity, group_price in discounts:
                 if cart_quantity >= req_quantity:
                     used_times = cart_quantity // req_quantity
