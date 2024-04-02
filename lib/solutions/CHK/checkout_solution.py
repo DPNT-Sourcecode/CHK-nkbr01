@@ -78,10 +78,11 @@ GROUP_DISCOUNT = {
 }
 
 class Cart:
-
     def __init__(self, s: str):
         self.total = 0
         self.cart = Counter(s)
+
+    def parse_skus(self, skus: str)
 
     def calculate_cart_total(self):
         try:
@@ -170,4 +171,5 @@ def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
+
 
