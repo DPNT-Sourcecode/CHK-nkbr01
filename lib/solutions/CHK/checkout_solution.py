@@ -85,7 +85,11 @@ class Cart:
         for product, promotion in PROMOS.items():
             req_quantity, promo_product = promotion
             if product == promo_product:
-                pass
+                req_quantity += 1
+                cart_quantity = self.cart[product]
+                disc_amount = FULL_PRICES[product]
+                cart_quantity, total_discount = self._calculate_multibuy(cart_quantity, req_quantity, disc_amount, total_discount)
+                total_discount += disc_amount
             else:
                 if product in self.cart and promo_product in self.cart:
                     used_times = self.cart[product] // req_quantity
@@ -93,8 +97,8 @@ class Cart:
                     updated_quantity = cart_quantity - used_times
                     previous_price = self._calculate_final_price(promo_product, cart_quantity)
                     updated_price = self._calculate_final_price(promo_product, updated_quantity)
-                    discount = previous_price - updated_price
-                    total_discount += discount
+                    disc_amount = previous_price - updated_price
+                    total_disc_amount += discount
         return total_discount
 
 
@@ -104,3 +108,4 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
