@@ -59,17 +59,36 @@ class TestCheckout():
                 ("A" * 7, 300),
                 ("A" * 8, 330),
                 ("A" * 9, 380),
-                ("AB") == 80,
-                ("BB") == 45,
-                ("BBB") == 75,
-                ("BBBB") == 90
-                ("AAABBBBBCC") == 290,
+                ("B" * 2, 45),
+                ("B" * 3, 75),
+                ("B" * 4, 90),
+                ("AB", 80),
+                ("AAABBBBBCC", 290),
             ],
     )
     def test_multiple_item_base_skus(self, skus, total):
         assert checkout_solution.checkout(skus) == total
 
-
+    @pytest.mark.parametrize(
+            "skus, total",
+            [
+                ("A" * 2, 100),
+                ("A" * 3, 130),
+                ("A" * 4, 180),
+                ("A" * 5, 200),
+                ("A" * 6, 250),
+                ("A" * 7, 300),
+                ("A" * 8, 330),
+                ("A" * 9, 380),
+                ("B" * 2, 45),
+                ("B" * 3, 75),
+                ("B" * 4, 90),
+                ("AB", 80),
+                ("AAABBBBBCC", 290),
+            ],
+    )
+    def test_multiple_item_promo(self, skus, total):
+        assert checkout_solution.checkout(skus) == total
 
 
     def test_discount_applied_multiple_item_1(self):
@@ -171,5 +190,6 @@ class TestCheckout():
 
     def test_discount_applied_multiple_item_37(self):
         assert checkout_solution.checkout("SSZYZ") == 85
+
 
 
