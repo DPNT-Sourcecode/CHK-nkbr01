@@ -122,3 +122,6 @@ class TestCheckout():
 
     def test_discount_applied_multiple_item_27(self):
         assert checkout_solution.checkout("VVV") == 130
+
+    def test_discount_applied_multiple_item_28(self):
+        assert checkout_solution.checkout("NNN") == 120

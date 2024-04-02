@@ -34,8 +34,8 @@ FULL_PRICES = {
 
 MULTIBUYS = {
     "A": [
-        (5, 200), #required_amount, multibuy_price
         (3, 130),
+        (5, 200), #required_amount, multibuy_price
     ],
     "B": [
         (2, 45)
