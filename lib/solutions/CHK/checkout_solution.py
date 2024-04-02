@@ -143,13 +143,6 @@ class Cart:
         return total_discount
     
     def _apply_group_discount(self):
-        """
-        GROUP_DISCOUNT = {
-            ("S","T","X","Y","Z") : [
-                (3, 45)
-            ],
-        }
-        """
         total_discount = 0
         for products, discounts in GROUP_DISCOUNT.items():
             cart_quantity, total_before_discount = 0, 0

@@ -152,4 +152,4 @@ class TestCheckout():
         assert checkout_solution.checkout("STXYZ") == 82
 
     def test_discount_applied_multiple_item_37(self):
-        assert checkout_solution.checkout("SSSYZ") == 82
+        assert checkout_solution.checkout("SSZYZ") == 85
