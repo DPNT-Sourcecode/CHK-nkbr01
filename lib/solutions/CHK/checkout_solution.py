@@ -40,13 +40,14 @@ class Cart:
                 if item in MULTIBUY_DISCOUNTS:
                     self.total -= self._apply_multibuy(item, quantity)
                     # self.total += multibuy_total
-                else:
-                    full_total = self.apply_full_price(item, quantity)
-                    self.total += full_total
+                # else:
+                #     full_total = self.apply_full_price(item, quantity)
+                #     self.total += full_total
+            # self.total -= self.apply_promotion()
+            return self.total
         except KeyError:
             return -1
-        self.total -= self.apply_promotion()
-        return self.total
+
     
     def _apply_full_price(self, item, quantity):
         total = quantity * FULL_PRICES[item]
@@ -69,11 +70,6 @@ class Cart:
                 discount = previous_price - updated_price
                 total_discount += discount
         return total_discount
-    
-    def apply_full_price(self, item, quantity):
-        item_price = FULL_PRICES[item]
-        total = quantity * item_price
-        return total
     
     # def apply_multibuy(self, item, quantity):
     #     total = 0
@@ -117,6 +113,7 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
 
 
 
