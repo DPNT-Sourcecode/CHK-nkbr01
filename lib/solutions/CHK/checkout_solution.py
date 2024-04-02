@@ -78,7 +78,7 @@ GROUP_DISCOUNT = {
 }
 
 class Cart:
-    def __init__(self, skus=str):
+    def __init__(self, skus: str):
         self.total = 0
         self.cart = self._parse_skus(skus)
 
@@ -88,7 +88,7 @@ class Cart:
         return self.cart
 
     def calculate_cart_total(self) -> int:
-        """Calculates cart total iterating over the cart products"""
+        """Calculates cart total iterating over the products in the cart"""
         try:
             for product, quantity in self.cart.items():
                 self.total += self._apply_full_price(product, quantity)
@@ -100,17 +100,17 @@ class Cart:
         except KeyError:
             return -1
     
-    def _apply_full_price(self, product, quantity):
+    def _apply_full_price(self, product: str, quantity: int) -> int:
         """Given the product and quantity returns product's full price"""
         product_price = FULL_PRICES[product]
         total = quantity * product_price
         return total
     
-    def _calculate_final_price(self, product, quantity):
+    def _calculate_final_price(self, product: str, quantity: int) -> int:
+        """Given the product and quantity returns product's final price after applying multibuy discounts"""
         if product in MULTIBUYS:
             return self._apply_full_price(product, quantity) - self._apply_multibuy(product, quantity)
-        else:
-            return self._apply_full_price(product, quantity)
+        return self._apply_full_price(product, quantity)
     
     def _calculate_multibuy(self, cart_quantity, req_quantity, disc_amount, total_discount):
         used_times = cart_quantity // req_quantity
@@ -176,6 +176,7 @@ def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
+
 
 
 
