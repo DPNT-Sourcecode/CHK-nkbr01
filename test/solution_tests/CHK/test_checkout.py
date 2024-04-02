@@ -126,11 +126,27 @@ class TestCheckout():
     def test_discount_applied_multiple_item_28(self):
         assert checkout_solution.checkout("NNN") == 120
 
-    def test_discount_applied_multiple_item_26(self):
+    def test_discount_applied_multiple_item_29(self):
         assert checkout_solution.checkout("G") == 20
 
-    def test_discount_applied_multiple_item_27(self):
+    def test_discount_applied_multiple_item_30(self):
         assert checkout_solution.checkout("ABCDEFGHIJKLMNOPQRSTUVWXYZ") == 853
 
-    def test_discount_applied_multiple_item_28(self):
+    def test_discount_applied_multiple_item_31(self):
         assert checkout_solution.checkout("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ") == 1646
+
+    def test_discount_applied_multiple_item_32(self):
+        assert checkout_solution.checkout("STX") == 45
+
+    def test_discount_applied_multiple_item_33(self):
+        assert checkout_solution.checkout("SSS") == 45
+
+    def test_discount_applied_multiple_item_34(self):
+        assert checkout_solution.checkout("STXYZS") == 90
+
+    def test_discount_applied_multiple_item_35(self):
+        assert checkout_solution.checkout("XYZAB") == 125
+
+    def test_discount_applied_multiple_item_36(self):
+        #choose the most expensive for the group discount
+        assert checkout_solution.checkout("STXYZ") == 82
