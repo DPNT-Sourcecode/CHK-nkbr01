@@ -124,7 +124,3 @@ class TestCheckout():
     )
     def test_multiple_item_groupbuy(self, skus, total):
         assert checkout_solution.checkout(skus) == total
-
-
-
-
