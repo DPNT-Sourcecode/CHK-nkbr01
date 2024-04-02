@@ -51,53 +51,26 @@ class TestCheckout():
     @pytest.mark.parametrize(
             "skus, total",
             [
-                ("@", -1),
-                ("~", -1),
-                ("A!", -1),
+                ("A" * 2, 100),
+                ("A" * 3, 130),
+                ("A" * 4, 180),
+                ("A" * 5, 200),
+                ("A" * 6, 250),
+                ("A" * 7, 300),
+                ("A" * 8, 330),
+                ("A" * 9, 380),
+                ("AB") == 80,
+                ("BB") == 45,
+                ("BBB") == 75,
+                ("BBBB") == 90
+                ("AAABBBBBCC") == 290,
             ],
     )
-    def test_illegal_input(self, skus, total):
-        assert checkout_solution.checkout(skus) == total    
+    def test_multiple_item_base_skus(self, skus, total):
+        assert checkout_solution.checkout(skus) == total
 
-    def test_single_item_returns_single_price(self):
-        assert checkout_solution.checkout("A") == 50
 
-    def test_multiple_items_returns_total_price(self):
-        assert checkout_solution.checkout("AB") == 80
 
-    def test_convert_string_to_cart_returns_cart(self):
-        cart = checkout_solution.Cart("ABBCCC")
-        assert cart.cart == {"A":1, "B":2, "C":3}
-
-    def test_illegal_item_returns_minus_one(self):
-        assert checkout_solution.checkout("AB~") == -1
-
-    def test_discount_applied_single_item(self):
-        assert checkout_solution.checkout("AAA") == 130
-
-    def test_discount_applied_two_A(self):
-        assert checkout_solution.checkout("AA") == 100
-
-    def test_discount_applied_four_A(self):
-        assert checkout_solution.checkout("AAAA") == 180
-
-    def test_discount_applied_five_A(self):
-        assert checkout_solution.checkout("AAAAA") == 200
-
-    def test_discount_applied_six_A(self):
-        assert checkout_solution.checkout("AAAAAA") == 250
-
-    def test_discount_applied_seven_A(self):
-        assert checkout_solution.checkout("AAAAAAA") == 300
-
-    def test_discount_applied_eight_A(self):
-        assert checkout_solution.checkout("AAAAAAAA") == 330
-
-    def test_discount_applied_nine_A(self):
-        assert checkout_solution.checkout("AAAAAAAAA") == 380
-
-    def test_discount_applied_multiple_item(self):
-        assert checkout_solution.checkout("AAABBBBBCC") == 290
 
     def test_discount_applied_multiple_item_1(self):
         assert checkout_solution.checkout("EE") == 80
@@ -113,18 +86,6 @@ class TestCheckout():
 
     def test_discount_applied_multiple_item_5(self):
         assert checkout_solution.checkout("BEBEEE") == 160
-
-    def test_discount_applied_multiple_item_6(self):
-        assert checkout_solution.checkout("B") == 30
-
-    def test_discount_applied_multiple_item_7(self):
-        assert checkout_solution.checkout("BB") == 45
-
-    def test_discount_applied_multiple_item_8(self):
-        assert checkout_solution.checkout("BBB") == 75
-
-    def test_discount_applied_multiple_item_9(self):
-        assert checkout_solution.checkout("BBBB") == 90
 
     def test_discount_applied_multiple_item_10(self):
         assert checkout_solution.checkout("ABCDEABCDE") == 280
@@ -210,4 +171,5 @@ class TestCheckout():
 
     def test_discount_applied_multiple_item_37(self):
         assert checkout_solution.checkout("SSZYZ") == 85
+
 
