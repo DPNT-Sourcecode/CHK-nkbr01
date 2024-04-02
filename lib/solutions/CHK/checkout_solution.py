@@ -150,7 +150,17 @@ class Cart:
             ],
         }
         """
-        for products,
+        for products, discounts in GROUP_DISCOUNT.items():
+            cart_quantity, total_before_discount = 0, 0
+            for product in products:
+                quantity = self.cart[product]
+                price = FULL_PRICES[product]
+                total = self._apply_full_price(product, quantity)
+                cart_quantity += quantity
+            for req_quantity, group_price in discounts:
+                if cart_quantity >= req_quantity:
+                    used_times = cart_quantity // req_quantity
+
 
 def checkout(skus: str) -> int:
     cart = Cart(skus)
