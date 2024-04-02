@@ -15,8 +15,8 @@ FULL_PRICES = {
 
 MULTIBUY_DISCOUNTS = {
     "A": [
-        (5, 200), #required_amount, total_discount_amount
-        (3, 130),
+        (5, 250 - 200), #required_amount, total_discount_amount
+        (3, 150 - 130),
     ],
     "B": [
         (2, 45)
@@ -70,22 +70,39 @@ class Cart:
         total = quantity * item_price
         return total
     
-    def apply_multibuy(self, item, quantity):
-        total = 0
-        cart_quantity = quantity
-        multibuy_promos = MULTIBUY_DISCOUNTS[item]
+    # def apply_multibuy(self, item, quantity):
+    #     total = 0
+    #     cart_quantity = quantity
+    #     multibuy_promos = MULTIBUY_DISCOUNTS[item]
+    #     while cart_quantity:
+    #         for promo in multibuy_promos:
+    #             promo_quantity, promo_price = promo[0], promo[1]
+    #             if cart_quantity >= promo_quantity:
+    #                 used_promo = cart_quantity // promo_quantity
+    #                 remainder = cart_quantity % promo_quantity
+    #                 total += promo_price * used_promo
+    #                 cart_quantity = remainder
+    #         if cart_quantity:
+    #             total += cart_quantity * FULL_PRICES[item]
+    #             cart_quantity = 0
+    #     return total
+
+    def _apply_multibuy(self, item, cart_quantity):
+        total_discount = 0
+        # cart_quantity = quantity
+        # multibuy_promos = MULTIBUY_DISCOUNTS[item]
         while cart_quantity:
-            for promo in multibuy_promos:
-                promo_quantity, promo_price = promo[0], promo[1]
-                if cart_quantity >= promo_quantity:
-                    used_promo = cart_quantity // promo_quantity
-                    remainder = cart_quantity % promo_quantity
-                    total += promo_price * used_promo
+            for req_quantity, disc_amount in MULTIBUY_DISCOUNTS[item]:
+                # promo_quantity, promo_price = promo[0], promo[1]
+                if cart_quantity >= req_quantity:
+                    used_promo = cart_quantity // req_quantity
+                    remainder = cart_quantity % req_quantity
+                    total_discount += promo_price * used_promo
                     cart_quantity = remainder
             if cart_quantity:
-                total += cart_quantity * FULL_PRICES[item]
+                total_discount += cart_quantity * FULL_PRICES[item]
                 cart_quantity = 0
-        return total
+        return total_discount
 
 def checkout(skus: str) -> int:
     cart = Cart(skus)
@@ -93,3 +110,4 @@ def checkout(skus: str) -> int:
     # cart.apply_promotion()
 
     return total
+
