@@ -86,4 +86,3 @@ class TestCheckout():
 
     # def test_discount_applied_multiple_item_15(self):
     #     assert checkout_solution.checkout("FF") == 20
-
