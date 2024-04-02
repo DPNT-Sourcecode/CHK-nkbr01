@@ -179,9 +179,3 @@ def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
-
-
-
-
-
-
