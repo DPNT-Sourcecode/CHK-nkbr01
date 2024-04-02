@@ -15,7 +15,7 @@ FULL_PRICES = {
     "H": 10,
     "I": 35,
     "J": 60,
-    "K": 80,
+    "K": 70,
     "L": 90,
     "M": 15,
     "N": 40,
@@ -23,14 +23,14 @@ FULL_PRICES = {
     "P": 50,
     "Q": 30,
     "R": 50,
-    "S": 30,
+    "S": 20,
     "T": 20,
     "U": 40,
     "V": 50,
     "W": 20,
-    "X": 90,
-    "Y": 10, 
-    "Z": 50,  
+    "X": 17,
+    "Y": 20, 
+    "Z": 21,  
 }
 
 MULTIBUYS = {
@@ -68,6 +68,12 @@ PROMOS = {
     "U": (3, "U"),
 }
 
+GROUP_DISCOUNT = {
+    ("S","T","X","Y","Z") : [
+        (3, 45)
+    ],
+}
+
 class Cart:
 
     def __init__(self, s: str):
@@ -81,6 +87,7 @@ class Cart:
                 if product in MULTIBUYS:
                     self.total -= self._apply_multibuy(product, quantity)
             self.total -= self._apply_promotion()
+            self.total -= self._apply_group_discount()
             return self.total
         except KeyError:
             return -1
@@ -134,6 +141,9 @@ class Cart:
                     discount = previous_price - updated_price
                     total_discount += discount
         return total_discount
+    
+    def _apply_group_discount():
+        pass
 
 def checkout(skus: str) -> int:
     cart = Cart(skus)
