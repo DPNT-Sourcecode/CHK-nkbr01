@@ -142,8 +142,8 @@ class Cart:
                     total_discount += discount
         return total_discount
     
-    def _apply_group_discount():
-        pass
+    def _apply_group_discount(self):
+        return 0
 
 def checkout(skus: str) -> int:
     cart = Cart(skus)
