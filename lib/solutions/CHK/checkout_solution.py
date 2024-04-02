@@ -4,13 +4,14 @@ from collections import Counter
 # skus = unicode string
 
 FULL_PRICES = {
-    "A": 50, 
-    "B": 30, 
-    "C": 20, 
-    "D": 15, 
-    "E": 40, 
+    # product: price
+    "A": 50,
+    "B": 30,
+    "C": 20,
+    "D": 15,
+    "E": 40,
     "F": 10,
-    "G": 20, 
+    "G": 20,
     "H": 10,
     "I": 35,
     "J": 60,
@@ -28,19 +29,17 @@ FULL_PRICES = {
     "V": 50,
     "W": 20,
     "X": 17,
-    "Y": 20, 
-    "Z": 21,  
+    "Y": 20,
+    "Z": 21,
 }
 
 MULTIBUYS = {
-    # product : [(required quantity, multibuy price)]
+    # product: [(required quantity, multibuy price)]
     "A": [
         (3, 130),
         (5, 200),
     ],
-    "B": [
-        (2, 45)
-    ],
+    "B": [(2, 45)],
     "H": [
         (5, 45),
         (10, 80),
@@ -61,8 +60,8 @@ MULTIBUYS = {
 }
 
 PROMOS = {
-    # product : [(required quantity, promo product)]
-    "E": (2, "B"), 
+    # product: [(required quantity, promo product)]
+    "E": (2, "B"),
     "F": (2, "F"),
     "N": (3, "M"),
     "R": (3, "Q"),
@@ -70,11 +69,10 @@ PROMOS = {
 }
 
 GROUP_DISCOUNT = {
-    # products : [(required quantity, group price)]
-    ("S","T","X","Y","Z") : [
-        (3, 45)
-    ],
+    # products: [(required quantity, group price)]
+    ("S", "T", "X", "Y", "Z"): [(3, 45)],
 }
+
 
 class Cart:
     def __init__(self, skus: str):
@@ -98,20 +96,28 @@ class Cart:
             return self.total
         except KeyError:
             return -1
-    
+
     def _apply_full_price(self, product: str, quantity: int) -> int:
         """Given the product and quantity returns product's full price"""
         product_price = FULL_PRICES[product]
         total = quantity * product_price
         return total
-    
+
     def _calculate_final_price(self, product: str, quantity: int) -> int:
         """Given the product and quantity returns product's final price after applying multibuy discounts"""
         if product in MULTIBUYS:
-            return self._apply_full_price(product, quantity) - self._apply_multibuy(product, quantity)
+            return self._apply_full_price(product, quantity) - self._apply_multibuy(
+                product, quantity
+            )
         return self._apply_full_price(product, quantity)
-    
-    def _calculate_multibuy(self, cart_quantity: int, req_quantity: int, disc_amount: int, total_discount: int) -> list:
+
+    def _calculate_multibuy(
+        self,
+        cart_quantity: int,
+        req_quantity: int,
+        disc_amount: int,
+        total_discount: int,
+    ) -> list:
         """Given the product's cart quantity, required quantity, discount amount and total discount for the multibuy promotion, returns the updated cart quantity and total discount"""
         used_times = cart_quantity // req_quantity
         cart_quantity = cart_quantity % req_quantity
@@ -125,8 +131,12 @@ class Cart:
             multibuy_prices = sorted(MULTIBUYS[product], reverse=True)
             for req_quantity, multibuy_price in multibuy_prices:
                 if cart_quantity >= req_quantity:
-                    multibuy_discount = req_quantity * FULL_PRICES[product] - multibuy_price
-                    cart_quantity, total_discount = self._calculate_multibuy(cart_quantity, req_quantity, multibuy_discount, total_discount)
+                    multibuy_discount = (
+                        req_quantity * FULL_PRICES[product] - multibuy_price
+                    )
+                    cart_quantity, total_discount = self._calculate_multibuy(
+                        cart_quantity, req_quantity, multibuy_discount, total_discount
+                    )
             if cart_quantity:
                 cart_quantity = 0
         return total_discount
@@ -140,15 +150,21 @@ class Cart:
                 req_quantity += 1
                 cart_quantity = self.cart[product]
                 disc_amount = FULL_PRICES[product]
-                cart_quantity, discount = self._calculate_multibuy(cart_quantity, req_quantity, disc_amount, 0)
+                cart_quantity, discount = self._calculate_multibuy(
+                    cart_quantity, req_quantity, disc_amount, 0
+                )
                 total_discount += discount
             else:
                 if product in self.cart and promo_product in self.cart:
                     used_times = self.cart[product] // req_quantity
                     cart_quantity = self.cart[promo_product]
                     updated_quantity = cart_quantity - used_times
-                    previous_price = self._calculate_final_price(promo_product, cart_quantity)
-                    updated_price = self._calculate_final_price(promo_product, updated_quantity)
+                    previous_price = self._calculate_final_price(
+                        promo_product, cart_quantity
+                    )
+                    updated_price = self._calculate_final_price(
+                        promo_product, updated_quantity
+                    )
                     discount = previous_price - updated_price
                     total_discount += discount
         return total_discount
@@ -160,8 +176,13 @@ class Cart:
             cart_quantity, total_before_discount = 0, 0
             price_list = []
             for product in products:
-                product_quantity, product_price = self.cart[product], FULL_PRICES[product]
-                total_before_discount += self._apply_full_price(product, product_quantity)
+                product_quantity, product_price = (
+                    self.cart[product],
+                    FULL_PRICES[product],
+                )
+                total_before_discount += self._apply_full_price(
+                    product, product_quantity
+                )
                 cart_quantity += product_quantity
                 price_list.extend([product_price] * product_quantity)
             # to choose the most expensive for the group discount, sort the list
@@ -170,8 +191,10 @@ class Cart:
                 if cart_quantity >= req_quantity:
                     used_times = cart_quantity // req_quantity
                     remainder = cart_quantity % req_quantity
-                    total_after_discount = (used_times * group_price) + sum(price_list[:remainder])
-                    total_discount += (total_before_discount - total_after_discount)
+                    total_after_discount = (used_times * group_price) + sum(
+                        price_list[:remainder]
+                    )
+                    total_discount += total_before_discount - total_after_discount
                     cart_quantity = remainder
         return total_discount
 
@@ -180,3 +203,4 @@ def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
+
