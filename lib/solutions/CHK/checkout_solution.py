@@ -1,6 +1,5 @@
 from collections import Counter
 
-
 # noinspection PyUnusedLocal
 # skus = unicode string
 
@@ -132,7 +131,8 @@ class Cart:
                 cart_quantity = 0
         return total_discount
 
-    def _apply_promotion(self):
+    def _apply_promotion(self) -> int:
+        """Iterates over the promotion products and returns the total promo discount applied to the cart"""
         total_discount = 0
         for product, promotion in PROMOS.items():
             req_quantity, promo_product = promotion
@@ -152,8 +152,9 @@ class Cart:
                     discount = previous_price - updated_price
                     total_discount += discount
         return total_discount
-    
-    def _apply_group_discount(self):
+
+    def _apply_group_discount(self) -> int:
+        """Iterates over the group discount products and returns the total group discount applied to the cart"""
         total_discount = 0
         for products, discounts in GROUP_DISCOUNT.items():
             cart_quantity, total_before_discount = 0, 0
@@ -178,6 +179,7 @@ def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
+
 
 
 
