@@ -32,7 +32,7 @@ FULL_PRICES = {
     "Z": 50,  
 }
 
-MULTIBUY_DISCOUNTS = {
+MULTIBUYS = {
     "A": [
         (5, 200), #required_amount, multibuy_price
         (3, 130),
@@ -77,7 +77,7 @@ class Cart:
         try:
             for product, quantity in self.cart.items():
                 self.total += self._apply_full_price(product, quantity)
-                if product in MULTIBUY_DISCOUNTS:
+                if product in MULTIBUYS:
                     self.total -= self._apply_multibuy(product, quantity)
             self.total -= self._apply_promotion()
             return self.total
@@ -101,8 +101,10 @@ class Cart:
     def _apply_multibuy(self, product, cart_quantity):
         total_discount = 0
         while cart_quantity:
-            for req_quantity, disc_amount in MULTIBUY_DISCOUNTS[product]:
+            multibuy_prices = sorted(MULTIBUYS[product])
+            for req_quantity, disc_amount in multibuy_prices:
                 if cart_quantity >= req_quantity:
+                    multibuy_discount = 
                     cart_quantity, total_discount = self._calculate_multibuy(cart_quantity, req_quantity, disc_amount, total_discount)
             if cart_quantity:
                 cart_quantity = 0

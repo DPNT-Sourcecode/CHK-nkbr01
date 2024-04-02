@@ -96,29 +96,29 @@ class TestCheckout():
     def test_discount_applied_multiple_item_18(self):
         assert checkout_solution.checkout("FFFFFF") == 40
 
-    def test_discount_applied_multiple_item_10(self):
-        assert checkout_solution.checkout("ABCDEABCDE") == 280
+    def test_discount_applied_multiple_item_19(self):
+        assert checkout_solution.checkout("NNNM") == 120
 
-    def test_discount_applied_multiple_item_11(self):
-        assert checkout_solution.checkout("CCADDEEBBA") == 280
+    def test_discount_applied_multiple_item_20(self):
+        assert checkout_solution.checkout("RRRQ") == 150
 
-    def test_discount_applied_multiple_item_12(self):
-        assert checkout_solution.checkout("AAAAAEEBAAABB") == 455
+    def test_discount_applied_multiple_item_21(self):
+        assert checkout_solution.checkout("UUUU") == 120
 
-    def test_discount_applied_multiple_item_13(self):
-        assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665
+    def test_discount_applied_multiple_item_22(self):
+        assert checkout_solution.checkout("HHHHH") == 45
 
-    def test_discount_applied_multiple_item_14(self):
-        assert checkout_solution.checkout("FFF") == 20
+    def test_discount_applied_multiple_item_23(self):
+        assert checkout_solution.checkout("HHHHHHHHHH") == 80
 
-    def test_discount_applied_multiple_item_15(self):
-        assert checkout_solution.checkout("FF") == 20
+    def test_discount_applied_multiple_item_24(self):
+        assert checkout_solution.checkout("PPPPP") == 200
 
-    def test_discount_applied_multiple_item_16(self):
-        assert checkout_solution.checkout("FFFF") == 30
+    def test_discount_applied_multiple_item_25(self):
+        assert checkout_solution.checkout("QQQ") == 80
 
-    def test_discount_applied_multiple_item_17(self):
-        assert checkout_solution.checkout("FFFFF") == 40
+    def test_discount_applied_multiple_item_26(self):
+        assert checkout_solution.checkout("VV") == 90
 
-    def test_discount_applied_multiple_item_18(self):
-        assert checkout_solution.checkout("FFFFFF") == 40
+    def test_discount_applied_multiple_item_27(self):
+        assert checkout_solution.checkout("VVV") == 130
