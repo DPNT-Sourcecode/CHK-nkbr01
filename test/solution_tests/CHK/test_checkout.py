@@ -87,8 +87,11 @@ class TestCheckout():
     def test_discount_applied_multiple_item_15(self):
         assert checkout_solution.checkout("FF") == 20
 
-    def test_discount_applied_multiple_item_14(self):
-        assert checkout_solution.checkout("FFF") == 20
+    def test_discount_applied_multiple_item_16(self):
+        assert checkout_solution.checkout("FFFF") == 30
 
-    def test_discount_applied_multiple_item_15(self):
-        assert checkout_solution.checkout("FF") == 20
+    def test_discount_applied_multiple_item_17(self):
+        assert checkout_solution.checkout("FFFFF") == 40
+
+    def test_discount_applied_multiple_item_18(self):
+        assert checkout_solution.checkout("FFFFFF") == 40

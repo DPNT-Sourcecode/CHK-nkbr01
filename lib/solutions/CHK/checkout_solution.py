@@ -1,4 +1,4 @@
-from collections import Counter, defaultdict
+from collections import Counter
 
 
 # noinspection PyUnusedLocal
@@ -40,10 +40,6 @@ class Cart:
                 self.total += self._apply_full_price(product, quantity)
                 if product in MULTIBUY_DISCOUNTS:
                     self.total -= self._apply_multibuy(product, quantity)
-                    # self.total += multibuy_total
-                # else:
-                #     full_total = self.apply_full_price(product, quantity)
-                #     self.total += full_total
             self.total -= self._apply_promotion()
             return self.total
         except KeyError:
@@ -58,7 +54,6 @@ class Cart:
         return self._apply_full_price(product, quantity) - self._apply_multibuy(product, quantity)
     
     def _calculate_multibuy(self, cart_quantity, req_quantity, disc_amount, total_discount):
-        # if cart_quantity >= req_quantity:
         used_times = cart_quantity // req_quantity
         cart_quantity = cart_quantity % req_quantity
         total_discount += disc_amount * used_times
@@ -98,7 +93,5 @@ class Cart:
 def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
-    # cart.apply_promotion()
-
     return total
 
