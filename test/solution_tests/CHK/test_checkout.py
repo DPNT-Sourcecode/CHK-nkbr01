@@ -72,66 +72,44 @@ class TestCheckout():
     @pytest.mark.parametrize(
             "skus, total",
             [
-                ("A" * 2, 100),
-                ("A" * 3, 130),
-                ("A" * 4, 180),
-                ("A" * 5, 200),
-                ("A" * 6, 250),
-                ("A" * 7, 300),
-                ("A" * 8, 330),
-                ("A" * 9, 380),
-                ("B" * 2, 45),
-                ("B" * 3, 75),
-                ("B" * 4, 90),
-                ("AB", 80),
-                ("AAABBBBBCC", 290),
+                ("EE", 80),
+                ("EEB", 80),
+                ("EEEB", 120),
+                ("EEEEBB", 160),
+                ("BEBEEE", 160),
+                ("ABCDEABCDE", 280),
+                ("CCADDEEBBA", 280),
+                ("AAAAAEEBAAABB", 455),
+                ("ABCDECBAABCABBAAAEEAA", 665),
+                ("F" * 2, 20),
+                ("F" * 3, 20),
+                ("F" * 4, 30),
+                ("F" * 5, 40),
+                ("F" * 6, 40),
             ],
     )
     def test_multiple_item_promo(self, skus, total):
         assert checkout_solution.checkout(skus) == total
 
+    @pytest.mark.parametrize(
+            "skus, total",
+            [
+                ("NNNM") == 120,
+                ("RRRQ") == 150,
+                ("UUUU") == 120,
+                ("HHHHH") == 45,
+                ("HHHHHHHHHH") == 80,
+                ("PPPPP") == 200,
+                ("QQQ") == 80,
+                ("VV") == 90,
+                ("VVV") == 130,
+                ("NNN") == 120
+            ],
+    )
+    def test_multiple_item__new_promo_and_multibuy(self, skus, total):
+        assert checkout_solution.checkout(skus) == total
 
-    def test_discount_applied_multiple_item_1(self):
-        assert checkout_solution.checkout("EE") == 80
 
-    def test_discount_applied_multiple_item_2(self):
-        assert checkout_solution.checkout("EEB") == 80
-
-    def test_discount_applied_multiple_item_3(self):
-        assert checkout_solution.checkout("EEEB") == 120
-
-    def test_discount_applied_multiple_item_4(self):
-        assert checkout_solution.checkout("EEEEBB") == 160
-
-    def test_discount_applied_multiple_item_5(self):
-        assert checkout_solution.checkout("BEBEEE") == 160
-
-    def test_discount_applied_multiple_item_10(self):
-        assert checkout_solution.checkout("ABCDEABCDE") == 280
-
-    def test_discount_applied_multiple_item_11(self):
-        assert checkout_solution.checkout("CCADDEEBBA") == 280
-
-    def test_discount_applied_multiple_item_12(self):
-        assert checkout_solution.checkout("AAAAAEEBAAABB") == 455
-
-    def test_discount_applied_multiple_item_13(self):
-        assert checkout_solution.checkout("ABCDECBAABCABBAAAEEAA") == 665
-
-    def test_discount_applied_multiple_item_14(self):
-        assert checkout_solution.checkout("FFF") == 20
-
-    def test_discount_applied_multiple_item_15(self):
-        assert checkout_solution.checkout("FF") == 20
-
-    def test_discount_applied_multiple_item_16(self):
-        assert checkout_solution.checkout("FFFF") == 30
-
-    def test_discount_applied_multiple_item_17(self):
-        assert checkout_solution.checkout("FFFFF") == 40
-
-    def test_discount_applied_multiple_item_18(self):
-        assert checkout_solution.checkout("FFFFFF") == 40
 
     def test_discount_applied_multiple_item_19(self):
         assert checkout_solution.checkout("NNNM") == 120
@@ -190,6 +168,7 @@ class TestCheckout():
 
     def test_discount_applied_multiple_item_37(self):
         assert checkout_solution.checkout("SSZYZ") == 85
+
 
 
 
