@@ -64,13 +64,16 @@ class Cart:
                     used_times = self.cart[product] // req_quantity
                     cart_quantity = self.cart[promo_product]
                     updated_quantity = cart_quantity - used_times
-                    if promo_product in MULTIBUY_DISCOUNTS:
-                        previous_price = self._apply_multibuy(promo_product, cart_quantity)
-                        updated_price = self._apply_multibuy(promo_product, updated_quantity)
-                    else:
-                        previous_price = self.apply_full_price(promo_product, cart_quantity)
-                        updated_price = self.apply_full_price(promo_product, updated_quantity)
+                    previous_price = self._apply_full_price(promo_product, cart_quantity) - self._apply_multibuy(promo_product, cart_quantity)
+                    updated_price = self._apply_full_price(promo_product, updated_quantity) - self._apply_multibuy(promo_product, updated_quantity)
                     discount = previous_price - updated_price
+                    # if promo_product in MULTIBUY_DISCOUNTS:
+                    #     previous_price = self._apply_multibuy(promo_product, cart_quantity)
+                    #     updated_price = self._apply_multibuy(promo_product, updated_quantity)
+                    # else:
+                    #     previous_price = self.apply_full_price(promo_product, cart_quantity)
+                    #     updated_price = self.apply_full_price(promo_product, updated_quantity)
+                    # discount = previous_price - updated_price
                     total_discount += discount
         return total_discount
 
