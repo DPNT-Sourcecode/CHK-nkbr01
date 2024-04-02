@@ -61,7 +61,10 @@ MULTIBUY_DISCOUNTS = {
 
 PROMOS = {
     "E": (2, "B"), 
-    "F": (2, "F")
+    "F": (2, "F"),
+    "N": (3, "M"),
+    "R": (3, "Q"),
+    "U": (3, "U"),
 }
 
 class Cart:
