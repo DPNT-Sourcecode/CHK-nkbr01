@@ -78,13 +78,17 @@ GROUP_DISCOUNT = {
 }
 
 class Cart:
-    def __init__(self, s: str):
+    def __init__(self, skus=str):
         self.total = 0
-        self.cart = Counter(s)
+        self.cart = self._parse_skus(skus)
 
-    def parse_skus(self, skus: str)
+    def _parse_skus(self, skus: str) -> Counter:
+        """Given the skus as a string returns a counter object as cart"""
+        self.cart = Counter(skus)
+        return self.cart
 
-    def calculate_cart_total(self):
+    def calculate_cart_total(self) -> int:
+        """Calculates cart total iterating over the cart products"""
         try:
             for product, quantity in self.cart.items():
                 self.total += self._apply_full_price(product, quantity)
@@ -97,6 +101,7 @@ class Cart:
             return -1
     
     def _apply_full_price(self, product, quantity):
+        """Given the product and quantity returns product's full price"""
         product_price = FULL_PRICES[product]
         total = quantity * product_price
         return total
@@ -171,5 +176,6 @@ def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
+
 
 
