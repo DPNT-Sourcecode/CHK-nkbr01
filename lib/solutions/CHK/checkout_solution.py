@@ -142,29 +142,32 @@ class Cart:
                     total_discount += discount
         return total_discount
     
-    # def _apply_group_discount(self):
-    #     """
-    #     GROUP_DISCOUNT = {
-    #         ("S","T","X","Y","Z") : [
-    #             (3, 45)
-    #         ],
-    #     }
-    #     """
-    #     for products, discounts in GROUP_DISCOUNT.items():
-    #         cart_quantity, total_before_discount = 0, 0
-    #         for product in products:
-    #             quantity = self.cart[product]
-    #             price = FULL_PRICES[product]
-    #             total = self._apply_full_price(product, quantity)
-    #             cart_quantity += quantity
-    #         for req_quantity, group_price in discounts:
-    #             if cart_quantity >= req_quantity:
-    #                 used_times = cart_quantity // req_quantity
-    #                 remainder = cart_quantity % req_quantity 
-    #                 total_price = (used_times * group_price) + remainder * #price of the rest
+    def _apply_group_discount(self):
+        """
+        GROUP_DISCOUNT = {
+            ("S","T","X","Y","Z") : [
+                (3, 45)
+            ],
+        }
+        """
+        for products, discounts in GROUP_DISCOUNT.items():
+            cart_quantity, total_before_discount = 0, 0
+            price_list = []
+            for product in products:
+                product_quantity = self.cart[product]
+                product_price = FULL_PRICES[product]
+                total = self._apply_full_price(product, product_quantity)
+                cart_quantity += product_quantity
+                price_list.append(product_price)
+            for req_quantity, group_price in discounts:
+                if cart_quantity >= req_quantity:
+                    used_times = cart_quantity // req_quantity
+                    remainder = cart_quantity % req_quantity 
+                    total_price = (used_times * group_price) + sum(price_list[:remainder])
 
 
 def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
+
