@@ -6,10 +6,58 @@ class TestCheckout():
     @pytest.mark.parametrize(
             "skus, total",
             [
-                (),
-                (),
+                ("A", 50), 
+                ("B", 30), 
+                ("C", 20), 
+                ("D", 15), 
+                ("E", 40), 
+                ("F", 10),
+                ("G", 20), 
+                ("H", 10),
+                ("I", 35),
+                ("J", 60),
+                ("K", 70),
+                ("L", 90),
+                ("M", 15),
+                ("N", 40),
+                ("O", 10),
+                ("P", 50),
+                ("Q", 30),
+                ("R", 50),
+                ("S", 20),
+                ("T", 20),
+                ("U", 40),
+                ("V", 50),
+                ("W", 20),
+                ("X", 17),
+                ("Y", 20), 
+                ("Z", 21),  
             ],
     )
+    def test_single_item(self, skus, total):
+        assert checkout_solution.checkout(skus) == total
+
+    @pytest.mark.parametrize(
+            "skus, total",
+            [
+                ("@", -1),
+                ("~", -1),
+                ("A!", -1),
+            ],
+    )
+    def test_illegal_input(self, skus, total):
+        assert checkout_solution.checkout(skus) == total
+
+    @pytest.mark.parametrize(
+            "skus, total",
+            [
+                ("@", -1),
+                ("~", -1),
+                ("A!", -1),
+            ],
+    )
+    def test_illegal_input(self, skus, total):
+        assert checkout_solution.checkout(skus) == total    
 
     def test_single_item_returns_single_price(self):
         assert checkout_solution.checkout("A") == 50
@@ -162,3 +210,4 @@ class TestCheckout():
 
     def test_discount_applied_multiple_item_37(self):
         assert checkout_solution.checkout("SSZYZ") == 85
+
