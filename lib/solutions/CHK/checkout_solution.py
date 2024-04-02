@@ -34,9 +34,10 @@ FULL_PRICES = {
 }
 
 MULTIBUYS = {
+    # product : [(required quantity, multibuy price)]
     "A": [
         (3, 130),
-        (5, 200), #required_amount, multibuy_price
+        (5, 200),
     ],
     "B": [
         (2, 45)
@@ -61,6 +62,7 @@ MULTIBUYS = {
 }
 
 PROMOS = {
+    # product : [(required quantity, promo product)]
     "E": (2, "B"), 
     "F": (2, "F"),
     "N": (3, "M"),
@@ -69,6 +71,7 @@ PROMOS = {
 }
 
 GROUP_DISCOUNT = {
+    # products : [(required quantity, group price)]
     ("S","T","X","Y","Z") : [
         (3, 45)
     ],
@@ -151,9 +154,8 @@ class Cart:
                 product_quantity, product_price = self.cart[product], FULL_PRICES[product]
                 total_before_discount += self._apply_full_price(product, product_quantity)
                 cart_quantity += product_quantity
-                price_list.extend([product_price * product_quantity])
+                price_list.extend([product_price] * product_quantity)
             price_list = sorted(price_list)
-            print(price_list)
             for req_quantity, group_price in discounts:
                 if cart_quantity >= req_quantity:
                     used_times = cart_quantity // req_quantity
@@ -168,3 +170,4 @@ def checkout(skus: str) -> int:
     cart = Cart(skus)
     total = cart.calculate_cart_total()
     return total
+
