@@ -164,6 +164,7 @@ class Cart:
                 total_before_discount += self._apply_full_price(product, product_quantity)
                 cart_quantity += product_quantity
                 price_list.extend([product_price] * product_quantity)
+            # to choose the most expensive for the group discount, sort the list
             price_list = sorted(price_list)
             for req_quantity, group_price in discounts:
                 if cart_quantity >= req_quantity:
